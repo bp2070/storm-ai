@@ -1,0 +1,26 @@
+{
+  "name": "storm-ai",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsx build.ts",
+    "start": "node dist/index.js",
+    "dev": "tsx build.ts && node dist/index.js"
+  },
+  "keywords": ["tui", "storm", "ai", "agent"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@orchetron/storm": "^0.1.1",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4"
+  },
+  "devDependencies": {
+    "@types/node": "^25.5.2",
+    "@types/react": "^19.0.0",
+    "esbuild": "^0.28.0",
+    "tsx": "^4.21.0",
+    "typescript": "^6.0.2"
+  }
+}
