@@ -1,4 +1,6 @@
 import React, { useState, useCallback } from "react";
+import { setTimeout } from "timers/promises";
+import { randomUUID } from "crypto";
 import {
   render,
   Box,
@@ -30,12 +32,13 @@ function App() {
   const [isProcessing, setIsProcessing] = useState(false);
 
   const handleSubmit = useCallback(async (value: string) => {
-    if (!value.trim()) return;
+    const trimmedInput = value.trim();
+    if (!trimmedInput) return;
 
     const userMessage: Message = {
-      id: Date.now().toString(),
+      id: randomUUID(),
       role: "user",
-      content: value,
+      content: trimmedInput,
       timestamp: new Date(),
     };
 
@@ -43,30 +46,35 @@ function App() {
     setInput("");
     setIsProcessing(true);
 
-    // Simulate AI response
-    setTimeout(() => {
+    try {
+      await setTimeout(1000);
+
       const assistantMessage: Message = {
-        id: (Date.now() + 1).toString(),
+        id: randomUUID(),
         role: "assistant",
-        content: `I received your message: "${value}". This is a demo response from the AI agent.`,
+        content: `I received your message: "${trimmedInput}". This is a demo response from the AI agent.`,
         timestamp: new Date(),
       };
       setMessages((prev) => [...prev, assistantMessage]);
+    } catch {
+      // Silently handle errors; isProcessing is reset in finally
+    } finally {
       setIsProcessing(false);
-    }, 1000);
+    }
   }, []);
 
   return (
     <Box flexDirection="column" height="100%" width="100%">
-      <Header title="AI Agent" borderBottom />
-      
+      <Header title="AI Agent" />
+
       <ScrollView flex={1} paddingX={1}>
         {messages.map((message) => (
           <MessageBubble
             key={message.id}
-            message={message.content}
-            isUser={message.role === "user"}
-          />
+            role={message.role === "user" ? "user" : "assistant"}
+          >
+            {message.content}
+          </MessageBubble>
         ))}
         {isProcessing && (
           <Box paddingX={2} paddingY={1}>
