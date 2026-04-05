@@ -5,10 +5,15 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "tsx build.ts",
-    "start": "node dist/index.js",
-    "dev": "tsx build.ts && node dist/index.js"
+    "start": "dotenvx run -- node dist/index.js",
+    "dev": "tsx build.ts && dotenvx run -- node dist/index.js"
   },
-  "keywords": ["tui", "storm", "ai", "agent"],
+  "keywords": [
+    "tui",
+    "storm",
+    "ai",
+    "agent"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
@@ -17,6 +22,7 @@
     "react-dom": "^19.2.4"
   },
   "devDependencies": {
+    "@dotenvx/dotenvx": "^1.59.1",
     "@types/node": "^22.0.0",
     "@types/react": "^19.0.0",
     "esbuild": "^0.28.0",

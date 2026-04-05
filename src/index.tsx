@@ -11,6 +11,7 @@ import {
   Spinner,
   Header,
 } from "@orchetron/storm";
+import { config } from "./config";
 
 interface Message {
   id: string;
@@ -84,13 +85,28 @@ function App() {
         )}
       </ScrollView>
 
-      <Box borderTop padding={1}>
-        <ChatInput
-          value={input}
-          onChange={setInput}
-          onSubmit={handleSubmit}
-          placeholder="Type your message..."
-        />
+      <Box flexDirection="column" paddingX={1} gap={1}>
+        <Text color="gray">
+          {config.modelName} · {config.endpointUrl}
+        </Text>
+
+        <Box borderStyle="single" borderColor="blue">
+          <Box flexDirection="row">
+            <Text color="blue">{" > "}</Text>
+            <ChatInput
+              value={input}
+              onChange={setInput}
+              onSubmit={handleSubmit}
+              placeholder="Type your message..."
+              isFocused={true}
+              cursorStyle="block"
+            />
+          </Box>
+        </Box>
+
+        <Text dim color="gray">
+          Press Ctrl+C twice to quit
+        </Text>
       </Box>
     </Box>
   );
