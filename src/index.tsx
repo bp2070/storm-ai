@@ -10,8 +10,11 @@ import {
   ChatInput,
   Spinner,
   Header,
+  ThemeProvider,
+  useTheme,
 } from "@orchetron/storm";
 import { config } from "./config";
+import { catppuccinTheme, c } from "./theme";
 
 interface Message {
   id: string;
@@ -20,7 +23,7 @@ interface Message {
   timestamp: Date;
 }
 
-function App() {
+function AppContent() {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
@@ -31,6 +34,7 @@ function App() {
   ]);
   const [input, setInput] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
+  const theme = useTheme();
 
   const handleSubmit = useCallback(async (value: string) => {
     const trimmedInput = value.trim();
@@ -64,8 +68,10 @@ function App() {
     }
   }, []);
 
+  const cols = theme.colors;
+
   return (
-    <Box flexDirection="column" height="100%" width="100%">
+    <Box flexDirection="column" height="100%" width="100%" backgroundColor={cols.surface.base}>
       <Header title="AI Agent" />
 
       <ScrollView flex={1} paddingX={1}>
@@ -80,19 +86,19 @@ function App() {
         {isProcessing && (
           <Box paddingX={2} paddingY={1}>
             <Spinner type="dots" />
-            <Text color="gray"> Thinking...</Text>
+            <Text color={cols.thinking.symbol}> Thinking...</Text>
           </Box>
         )}
       </ScrollView>
 
       <Box flexDirection="column" paddingX={1} gap={1}>
-        <Text color="gray">
+        <Text color={cols.text.secondary}>
           {config.modelName} · {config.endpointUrl}
         </Text>
 
-        <Box borderStyle="single" borderColor="blue">
+        <Box borderStyle="single" borderColor={cols.input.borderActive}>
           <Box flexDirection="row">
-            <Text color="blue">{" > "}</Text>
+            <Text color={cols.input.prompt}>{"> "}</Text>
             <ChatInput
               value={input}
               onChange={setInput}
@@ -104,11 +110,19 @@ function App() {
           </Box>
         </Box>
 
-        <Text dim color="gray">
+        <Text dim color={cols.input.border}>
           Press Ctrl+C twice to quit
         </Text>
       </Box>
     </Box>
+  );
+}
+
+function App() {
+  return (
+    <ThemeProvider theme={catppuccinTheme}>
+      <AppContent />
+    </ThemeProvider>
   );
 }
 
