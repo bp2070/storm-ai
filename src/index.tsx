@@ -14,7 +14,7 @@ import {
   useTheme,
 } from "@orchetron/storm";
 import { config } from "./config";
-import { catppuccinTheme, c } from "./theme";
+import { charmtoneTheme } from "./themes/charmtone";
 
 interface Message {
   id: string;
@@ -96,7 +96,7 @@ function AppContent() {
           {config.modelName} · {config.endpointUrl}
         </Text>
 
-        <Box borderStyle="single" borderColor={cols.input.borderActive}>
+        <Box borderStyle="single" borderColor={cols.text.secondary}>
           <Box flexDirection="row">
             <Text color={cols.input.prompt}>{"> "}</Text>
             <ChatInput
@@ -110,7 +110,7 @@ function AppContent() {
           </Box>
         </Box>
 
-        <Text dim color={cols.input.border}>
+        <Text color={cols.text.secondary}>
           Press Ctrl+C twice to quit
         </Text>
       </Box>
@@ -120,7 +120,7 @@ function AppContent() {
 
 function App() {
   return (
-    <ThemeProvider theme={catppuccinTheme}>
+    <ThemeProvider theme={charmtoneTheme}>
       <AppContent />
     </ThemeProvider>
   );
