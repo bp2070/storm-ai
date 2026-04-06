@@ -13,7 +13,7 @@ await esbuild.build({
   },
   jsx: 'automatic',
   jsxImportSource: 'react',
-  external: ['@orchetron/storm', 'react', 'react-dom'],
+  external: ['@orchetron/storm', 'react', 'react-dom', 'pino', 'pino-pretty', 'better-sqlite3', 'drizzle-orm'],
   sourcemap: true,
 });
 

@@ -1,12 +1,19 @@
 import { LLMProvider } from "./LLMProvider";
-import { MockLLM } from "./MockLLM";
+import { MockLLM, MockConfig } from "./MockLLM";
 
 export type ProviderType = "mock";
 
-export function createProvider(type: ProviderType, _config?: unknown): LLMProvider {
+type ProviderConfigMap = {
+  mock: MockConfig;
+};
+
+export function createProvider<T extends ProviderType>(
+  type: T,
+  config?: ProviderConfigMap[T]
+): LLMProvider {
   switch (type) {
     case "mock":
-      return new MockLLM(_config as Parameters<typeof MockLLM>[0]);
+      return new MockLLM(config as MockConfig);
     default:
       throw new Error(`Unknown provider type: ${type}`);
   }
@@ -14,3 +21,4 @@ export function createProvider(type: ProviderType, _config?: unknown): LLMProvid
 
 export { LLMProvider } from "./LLMProvider";
 export { MockLLM } from "./MockLLM";
+export type { MockConfig } from "./MockLLM";

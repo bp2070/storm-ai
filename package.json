@@ -6,7 +6,10 @@
   "scripts": {
     "build": "tsx build.ts",
     "start": "dotenvx run -- node dist/index.js",
-    "dev": "tsx build.ts && dotenvx run -- node dist/index.js"
+    "dev": "tsx build.ts && dotenvx run -- node dist/index.js",
+    "clean": "rm -rf dist data/storm.db data/current_session logs/*.log",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "keywords": [
     "tui",
@@ -18,15 +21,25 @@
   "license": "ISC",
   "dependencies": {
     "@orchetron/storm": "^0.1.1",
+    "better-sqlite3": "^12.8.0",
+    "drizzle-orm": "^0.45.2",
+    "pino": "^10.3.1",
     "react": "^19.2.4",
     "react-dom": "^19.2.4"
   },
   "devDependencies": {
     "@dotenvx/dotenvx": "^1.59.1",
+    "@testing-library/react": "^16.3.2",
+    "@types/better-sqlite3": "^7.6.13",
     "@types/node": "^22.0.0",
     "@types/react": "^19.0.0",
+    "drizzle-kit": "^0.31.10",
     "esbuild": "^0.28.0",
+    "happy-dom": "^20.8.9",
+    "jsdom": "^29.0.1",
+    "pino-pretty": "^13.1.3",
     "tsx": "^4.21.0",
-    "typescript": "^6.0.2"
+    "typescript": "^6.0.2",
+    "vitest": "^4.1.2"
   }
 }
