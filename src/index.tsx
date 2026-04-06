@@ -92,11 +92,11 @@ function AppContent() {
       </ScrollView>
 
       <Box flexDirection="column" paddingX={1} gap={1}>
-        <Text color={cols.text.secondary}>
-          {config.modelName} · {config.endpointUrl}
+        <Text color={cols.text.primary}>
+          Status: Connected | Model: {config.modelName} | Endpoint: {config.endpointUrl}
         </Text>
 
-        <Box borderStyle="single" borderColor={cols.text.secondary}>
+        <Box borderStyle="single" borderColor={cols.input.border}>
           <Box flexDirection="row">
             <Text color={cols.input.prompt}>{"> "}</Text>
             <ChatInput
